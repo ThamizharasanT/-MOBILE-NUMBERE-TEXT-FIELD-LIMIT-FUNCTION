@@ -48,3 +48,30 @@ class loginTableViewController: UITableViewController, UITextFieldDelegate {
         }
     }
 }
+
+
+//OR 
+
+
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        mobileField.delegate = self
+         mobileField.keyboardType = UIKeyboardType.numberpad
+    }
+//MARK: Text field Limit
+    private func textLimit(existingText: String?,
+                           newText: String,
+                           limit: Int) -> Bool {
+        let text = existingText ?? ""
+            let isAtLimit = text.count + newText.count <= limit
+            return isAtLimit
+        
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        let currentText = mobileField.text ?? ""
+//        guard let stringRange = Range(range, in: currentText)else{return false}
+//        let updateText = currentText.replacingCharacters(in: stringRange, with: string)
+//        return updateText.count == 10
+        return self.textLimit(existingText: mobileField.text, newText: string, limit: 10)
+    }
